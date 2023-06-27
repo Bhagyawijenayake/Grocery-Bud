@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
-const Form = () => {
-    const [newItemName, setNewItemName] = useState("");
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(newItemName);
-        setNewItemName("")
-
-    }
+const Form = ({ addItem }) => {
+  const [newItemName, setNewItemName] = useState("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!newItemName) return;
+    addItem(newItemName);
+    setNewItemName("");
+  };
   return (
     <form onSubmit={handleSubmit}>
       <h4>grocery bud</h4>
@@ -19,8 +19,10 @@ const Form = () => {
           className="form-input"
           value={newItemName}
           onChange={(event) => setNewItemName(event.target.value)}
-              />
-              <button type="submit"className="btn">add item</button>
+        />
+        <button type="submit" className="btn">
+          add item
+        </button>
       </div>
     </form>
   );
